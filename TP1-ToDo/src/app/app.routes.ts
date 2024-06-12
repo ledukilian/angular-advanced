@@ -6,6 +6,10 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.component'),
   },
   {
+    path: 'detail/:id',
+    loadComponent: () => import('./todo-detail/todo-detail.component'),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

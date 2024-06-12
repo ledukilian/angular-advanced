@@ -1,5 +1,5 @@
 import {computed, effect, Injectable, signal} from '@angular/core';
-import {Todo} from "../models/todo";
+import {CreateTodo, Todo} from "../models/todo";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,10 @@ export class TodoService {
     });
   }
 
-  addTodo(todo: Todo) {
-    this.#todos.update(todos => [...todos, todo]);
+  addTodo(todo: CreateTodo) {
+    this.#todos.update(todos => [...todos,
+      {id: Date.now().toString(), ...todo}
+    ]);
     console.log('Todo added!', todo);
   }
 }

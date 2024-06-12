@@ -1,4 +1,4 @@
-import {Component, inject, output} from '@angular/core';
+import {Component, inject, input, output} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CreateTodo, Todo} from "../../../shared/models/todo";
 
@@ -9,9 +9,7 @@ import {CreateTodo, Todo} from "../../../shared/models/todo";
     ReactiveFormsModule
   ],
   template: `
-    <form [formGroup]="todoForm"
-    (ngSubmit)="todoSubmitted.emit(todoForm.getRawValue())"
-    >
+    <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
       <input type="text" formControlName="title" placeholder="Titre" />
       <input
         type="text"
@@ -26,10 +24,16 @@ import {CreateTodo, Todo} from "../../../shared/models/todo";
 
 export class TodoFormComponent {
   private fb = inject(FormBuilder);
+
   todoForm = this.fb.nonNullable.group({
     title: ['', Validators.required],
     description: [''],
   });
 
   todoSubmitted = output<CreateTodo>();
+
+  onSubmit() {
+    this.todoSubmitted.emit(this.todoForm.getRawValue());
+    this.todoForm.get('title')?.reset();
+  }
 }

@@ -5,13 +5,9 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
-  `,
+  template: `<router-outlet />`,
   styles: [],
 })
-export class AppComponent {
+export default class AppComponent {
   title = 'TP1-ToDo';
 }

@@ -22,4 +22,9 @@ export class TodoService {
     ]);
     console.log('Todo added!', todo);
   }
+
+  deleteTodo(todo: Todo) {
+    this.#todos.update(todos => todos.filter(t => t.id !== todo.id));
+    console.log('Todo deleted!', todo);
+  }
 }

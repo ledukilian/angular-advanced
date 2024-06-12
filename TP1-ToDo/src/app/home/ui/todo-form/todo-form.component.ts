@@ -1,6 +1,6 @@
-import {Component, inject, input, output} from '@angular/core';
+import {Component, inject, output} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
-import {CreateTodo, Todo} from "../../../shared/models/todo";
+import {CreateTodo} from "../../../shared/models/todo";
 
 @Component({
   selector: 'app-todo-form',

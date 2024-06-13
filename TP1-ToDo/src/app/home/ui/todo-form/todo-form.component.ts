@@ -35,5 +35,6 @@ export class TodoFormComponent {
   onSubmit() {
     this.todoSubmitted.emit(this.todoForm.getRawValue());
     this.todoForm.get('title')?.reset();
+    this.todoForm.get('description')?.reset();
   }
 }

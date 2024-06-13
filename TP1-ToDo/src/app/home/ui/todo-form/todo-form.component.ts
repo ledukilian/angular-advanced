@@ -16,7 +16,7 @@ import {CreateTodo} from "../../../shared/models/todo";
         formControlName="description"
         placeholder="Description"
       />
-      <button [disabled]="!todoForm.valid" type="submit">Ajouter</button>
+      <button class="btn-green" [disabled]="!todoForm.valid" type="submit">Ajouter</button>
     </form>
   `,
   styles: ``

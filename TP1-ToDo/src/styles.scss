@@ -7,39 +7,41 @@ body {
 
 button {
   transition: 0.4s;
-  background-color: #68c559;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-button:hover {
-  transition: 0.4s;
-  background-color: #5aa24e;
-}
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
-
 ul button {
   transition: 0.4s;
   font-size: 0.6em;
   padding: 3px 6px;
 }
-ul button:nth-child(2) {
+
+button.btn-green {
+  background-color: #68c559;
+}
+button.btn-green:hover {
+  transition: 0.4s;
+  background-color: #5aa24e;
+}
+button.btn-blue {
   background-color: #2a7cda;
 }
-ul button:nth-child(2):hover {
+button.btn-blue:hover {
   transition: 0.4s;
   background-color: #1b599f;
 }
-ul button:nth-child(3) {
+button.btn-red {
   margin-left: 2px;
   background-color: #da2a2a;
 }
-ul button:nth-child(3):hover {
+button.btn-red:hover {
   transition: 0.4s;
   background-color: #af2121;
 }

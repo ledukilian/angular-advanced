@@ -1,13 +1,16 @@
 import {Component, computed, inject} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {TodoService} from "../shared/data-access/todo.service";
 import {toSignal} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-todo-detail',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   template: `
+    <button class="btn-blue" routerLink="/home">Retour</button>
     @if (todo(); as todo) {
       <h1>{{ todo.title }}</h1>
       <p>{{ todo.description }}</p>

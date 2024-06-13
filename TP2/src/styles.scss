@@ -2,3 +2,49 @@
 * {
   font-family: "Arial", sans-serif;
 }
+body {
+  background-color: #f5f5f5;
+  margin: 3rem;
+}
+
+button {
+  transition: 0.4s;
+  color: white;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+button.btn-green {
+  background-color: #68c559;
+}
+button.btn-green:hover {
+  transition: 0.4s;
+  background-color: #5aa24e;
+}
+button.btn-blue {
+  background-color: #2a7cda;
+}
+button.btn-blue:hover {
+  transition: 0.4s;
+  background-color: #1b599f;
+}
+button.btn-red {
+  margin-left: 2px;
+  background-color: #da2a2a;
+}
+button.btn-red:hover {
+  transition: 0.4s;
+  background-color: #af2121;
+}
+
+input {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

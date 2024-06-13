@@ -27,6 +27,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 </section>
   `,
   imports: [ReactiveFormsModule, KeyValuePipe],
+  styles: [``],
 })
 export class FormModalComponent {
   formGroup = input.required<FormGroup>();

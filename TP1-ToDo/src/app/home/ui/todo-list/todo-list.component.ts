@@ -10,7 +10,9 @@ import {TodoService} from "../../../shared/data-access/todo.service";
     <ul>
       @for (todo of todos(); track $index) {
         <li>
-          <a routerLink="/detail/{{ todo.id }}">{{ todo.title }}</a> <button (click)="todoService.deleteTodo(todo)">Supprimer</button>
+          <a>{{ todo.title }}</a>
+           <button routerLink="/detail/{{ todo.id }}">Voir</button>
+          <button (click)="todoService.deleteTodo(todo)">Supprimer</button>
         </li>
       } @empty {
         <li>Rien à afficher</li>

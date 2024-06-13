@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f5f5f5;
+  margin: 3rem;
+}
+
+button {
+  transition: 0.4s;
+  background-color: #68c559;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  transition: 0.4s;
+  background-color: #5aa24e;
+}
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+ul button {
+  transition: 0.4s;
+  font-size: 0.6em;
+  padding: 3px 6px;
+}
+ul button:nth-child(2) {
+  background-color: #2a7cda;
+}
+ul button:nth-child(2):hover {
+  transition: 0.4s;
+  background-color: #1b599f;
+}
+ul button:nth-child(3) {
+  margin-left: 2px;
+  background-color: #da2a2a;
+}
+ul button:nth-child(3):hover {
+  transition: 0.4s;
+  background-color: #af2121;
+}
+
+input {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

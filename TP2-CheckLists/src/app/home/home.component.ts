@@ -12,9 +12,8 @@ import {ChecklistListComponent} from "./ui/checklist-list/checklist-list.compone
   template: `
     <header>
       <h1>Quicklists</h1>
-      <button class="btn-blue" (click)="checklistBeingEdited.set({})">Ajouter une liste</button>
+      <button class="btn-green" (click)="checklistBeingEdited.set({})">Ajouter une liste</button>
     </header>
-
     <section>
       <h2>Vos listes</h2>
       <app-checklist-list [checklists]="checkListService.checklists()" />

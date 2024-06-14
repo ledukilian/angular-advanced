@@ -1,4 +1,4 @@
-import {Injectable, computed, signal, inject} from '@angular/core';
+import {Injectable, computed, signal, inject, effect} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import {
@@ -51,7 +51,6 @@ export class ChecklistItemService {
           },
         ],
       }));
-      this.saveToStorage();
     });
 
     this.remove$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) => {
@@ -59,7 +58,6 @@ export class ChecklistItemService {
         ...state,
         checklistItems: state.checklistItems.filter((item) => item.id !== checklistItemId),
       }));
-      this.saveToStorage();
     });
 
     this.reset$.pipe(takeUntilDestroyed()).subscribe((checklist) => {
@@ -71,7 +69,6 @@ export class ChecklistItemService {
             : item
         ),
       }));
-      this.saveToStorage();
     });
 
     this.toggle$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) => {
@@ -83,6 +80,9 @@ export class ChecklistItemService {
             : item
         ),
       }));
+    });
+
+    effect(() => {
       this.saveToStorage();
     });
   }

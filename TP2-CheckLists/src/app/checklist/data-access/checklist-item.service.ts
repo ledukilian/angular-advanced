@@ -50,7 +50,7 @@ export class ChecklistItemService {
           },
         ],
       }));
-      this.saveToStorage(checklistItem.checklistId);
+      this.saveToStorage();
     });
 
     this.reset$.pipe(takeUntilDestroyed()).subscribe((checklist) => {
@@ -62,7 +62,7 @@ export class ChecklistItemService {
             : item
         ),
       }));
-      this.saveToStorage(checklist.id);
+      this.saveToStorage();
     });
 
     this.toggle$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) => {
@@ -74,16 +74,16 @@ export class ChecklistItemService {
             : item
         ),
       }));
-      this.saveToStorage(this.checklistItems()[0].checklistId);
+      this.saveToStorage();
     });
   }
 
-  private saveToStorage(checklistId: string | null | undefined) {
-    this.storageService.set('checklists' + checklistId, JSON.stringify(this.checklistItems()));
+  private saveToStorage() {
+    this.storageService.set('checklists-content', JSON.stringify(this.checklistItems()));
   }
 
   public loadChecklistItemsFromStorage(checklistId: string | null | undefined) {
-    const storedChecklistItems = this.storageService.get('checklists' + checklistId);
+    const storedChecklistItems = this.storageService.get('checklists-content');
     if (storedChecklistItems) {
       this.state.update(() => ({
         checklistItems: JSON.parse(storedChecklistItems),

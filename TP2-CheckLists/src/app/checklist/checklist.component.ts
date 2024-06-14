@@ -22,9 +22,11 @@ import {ChecklistItemListComponent} from "./ui/checklist-item-list/checklist-ite
   ],
   template: `
     @if (checklist(); as checklist){
-      <app-checklist-header [checklist]="checklist" (addItem)="checklistItemBeingEdited.set({})"/>
+      <app-checklist-header [checklist]="checklist"
+                            (addItem)="checklistItemBeingEdited.set({})"
+                            (resetCheckList)="checklistItemService.reset$.next(checklist)"/>
     }
-    <app-checklist-item-list [checklistItems]="items()"/>
+    <app-checklist-item-list (toggle)="checklistItemService.toggle$.next($event)" [checklistItems]="items()"/>
     <app-modal [isOpen]="!!checklistItemBeingEdited()">
       <ng-template>
         <app-form-modal
@@ -69,6 +71,7 @@ export default class ChecklistComponent {
   });
 
   constructor() {
+    this.checklistItemService.loadChecklistItemsFromStorage(this.params()?.get('id'));
     effect(() => {
       const checklistItem = this.checklistItemBeingEdited();
       console.log(checklistItem);

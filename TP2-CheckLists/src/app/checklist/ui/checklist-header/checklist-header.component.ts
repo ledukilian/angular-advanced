@@ -12,7 +12,10 @@ import {Checklist} from "../../../shared/interfaces/checklist";
               {{ checklist().title }}
       </h1>
       <!--<p class="muted">{{ checklist().id }}</p>-->
-      <button class="btn-green" (click)="addItem.emit()">Ajouter un ToDo</button>
+      <div>
+        <button class="btn-red btn-space" (click)="resetCheckList.emit()">Réinitialiser</button>
+        <button class="btn-green btn-space" (click)="addItem.emit()">Ajouter un ToDo</button>
+      </div>
     </header>
   `,
   imports: [RouterLink],
@@ -20,4 +23,5 @@ import {Checklist} from "../../../shared/interfaces/checklist";
 export class ChecklistHeaderComponent {
   checklist = input.required<Checklist>();
   addItem = output();
+  resetCheckList = output();
 }

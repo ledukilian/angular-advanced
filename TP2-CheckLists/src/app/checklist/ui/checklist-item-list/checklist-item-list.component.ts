@@ -1,24 +1,35 @@
-import {Component, input} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {ChecklistItem} from "../../../shared/interfaces/checklist-item";
+import {NgClass} from "@angular/common";
+
+class RemoveCheckListitem {
+}
 
 @Component({
   selector: 'app-checklist-item-list',
   standalone: true,
-  imports: [],
+  imports: [
+    NgClass
+  ],
   template: `
     <section>
       <ul>
         @for (item of checklistItems(); track item.id) {
-          <li class="traite">
+          <li [ngClass]="{'traite': item.checked}">
             <span>
               <div class="badge"></div>
               {{ item.title }}
             </span>
             <span>
               <button class="btn-blue btn-space">🚮</button>
-              <button class="btn-green btn-space">✅</button>
-              <button class="btn-red btn-space">❌</button>
-                  <!--<button class="btn-blue btn-space">Voir</button>-->
+              @if (!item.checked){
+                <button class="btn-green btn-space"
+                        (click)="toggle.emit(item.id)">✅</button>
+              }
+              @if (item.checked){
+                <button class="btn-red btn-space"
+                        (click)="toggle.emit(item.id)">❌</button>
+              }
             </span>
           </li>
         } @empty {
@@ -33,5 +44,5 @@ import {ChecklistItem} from "../../../shared/interfaces/checklist-item";
 })
 export class ChecklistItemListComponent {
   checklistItems = input.required<ChecklistItem[]>();
-
+  toggle = output<RemoveCheckListitem>();
 }

@@ -32,8 +32,9 @@ export class ChecklistItemService {
 
   // sources
   add$ = new Subject<AddChecklistItem>();
-  toggle$ = new Subject<CheckListItem>();
   reset$ = new Subject<Checklist>();
+  toggle$ = new Subject<CheckListItem>();
+  remove$ = new Subject<CheckListItem>();
 
   constructor() {
     // reducers
@@ -49,6 +50,14 @@ export class ChecklistItemService {
             checked: false,
           },
         ],
+      }));
+      this.saveToStorage();
+    });
+
+    this.remove$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) => {
+      this.state.update((state) => ({
+        ...state,
+        checklistItems: state.checklistItems.filter((item) => item.id !== checklistItemId),
       }));
       this.saveToStorage();
     });

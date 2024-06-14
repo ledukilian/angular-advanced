@@ -11,12 +11,13 @@ import {ChecklistListComponent} from "./ui/checklist-list/checklist-list.compone
   selector: 'app-home',
   template: `
     <header>
-      <h1>Quicklists</h1>
+      <h1>📌 Quicklists</h1>
       <button class="btn-green" (click)="checklistBeingEdited.set({})">Ajouter une liste</button>
     </header>
     <section>
       <h2>Vos listes</h2>
-      <app-checklist-list [checklists]="checkListService.checklists()" />
+      <app-checklist-list [checklists]="checkListService.checklists()"
+                          (remove)="this.checkListService.remove$.next($event)" />
     </section>
 
     <app-modal [isOpen]="!!checklistBeingEdited()">

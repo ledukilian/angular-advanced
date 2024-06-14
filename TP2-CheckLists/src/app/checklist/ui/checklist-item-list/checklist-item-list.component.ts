@@ -1,5 +1,5 @@
 import {Component, input, output} from '@angular/core';
-import {ChecklistItem} from "../../../shared/interfaces/checklist-item";
+import {ChecklistItem, RemoveChecklistItem, ToogleCheckListItem} from "../../../shared/interfaces/checklist-item";
 import {NgClass} from "@angular/common";
 
 class RemoveCheckListitem {
@@ -21,7 +21,8 @@ class RemoveCheckListitem {
               {{ item.title }}
             </span>
             <span>
-              <button class="btn-blue btn-space">🚮</button>
+              <button class="btn-blue btn-space"
+                      (click)="remove.emit(item.id)">🚮</button>
               @if (!item.checked){
                 <button class="btn-green btn-space"
                         (click)="toggle.emit(item.id)">✅</button>
@@ -44,5 +45,6 @@ class RemoveCheckListitem {
 })
 export class ChecklistItemListComponent {
   checklistItems = input.required<ChecklistItem[]>();
-  toggle = output<RemoveCheckListitem>();
+  toggle = output<ToogleCheckListItem>();
+  remove = output<RemoveChecklistItem>();
 }

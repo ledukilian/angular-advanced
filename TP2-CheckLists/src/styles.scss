@@ -55,12 +55,28 @@ button.btn-blue:hover {
   background-color: #1b599f;
 }
 button.btn-red {
-  margin-left: 2px;
   background-color: #e15f5f;
 }
 button.btn-red:hover {
   transition: 0.4s;
   background-color: #c53d3d;
+}
+button.btn-yellow {
+  background-color: #fdc44a;
+}
+button.btn-yellow:hover {
+  transition: 0.4s;
+  background-color: #e0a21d;
+}
+.red-link {
+  color: #e15f5f;
+  font-weight: bold;
+  cursor: pointer;
+}
+.blue-link {
+  color: #2a7cda;
+  font-weight: bold;
+  cursor: pointer;
 }
 input {
   padding: 10px;
@@ -128,4 +144,12 @@ app-checklist-list p {
 }
 li.traite .badge {
   background-color: #68c559;
+}
+.small {
+  padding: 3px 6px;
+  font-size: 0.6em;
+}
+.btn-small {
+  padding: 3px 6px;
+  font-size: 0.6em;
 }

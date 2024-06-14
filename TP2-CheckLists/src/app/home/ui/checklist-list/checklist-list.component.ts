@@ -11,7 +11,10 @@ import {RouterLink} from "@angular/router";
         <li>
           {{ checklist.title }}
           <div>
-            <button (click)="remove.emit(checklist)" class="btn-red btn-space">Supprimer</button>
+            <a class="small red-link"
+                                (click)="remove.emit(checklist)">Supprimer</a>
+            <a class="small blue-link"
+                                (click)="edit.emit(checklist)">Modifier</a>
             <button class="btn-blue btn-space" routerLink="/checklist/{{ checklist.id }}">Consulter</button>
           </div>
         </li>
@@ -27,4 +30,5 @@ import {RouterLink} from "@angular/router";
 export class ChecklistListComponent {
   checklists = input.required<Checklist[]>();
   remove = output<Checklist>();
+  edit = output<Checklist>();
 }

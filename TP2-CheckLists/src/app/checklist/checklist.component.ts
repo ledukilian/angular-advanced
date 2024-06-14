@@ -23,22 +23,29 @@ import {ChecklistItemListComponent} from "./ui/checklist-item-list/checklist-ite
   template: `
     @if (checklist(); as checklist){
       <app-checklist-header [checklist]="checklist"
-                            (addItem)="checklistItemBeingEdited.set({})"
+                            (addItem)="checklistItemBeingEdited.set({});"
                             (resetCheckList)="checklistItemService.reset$.next(checklist)"/>
     }
     <app-checklist-item-list [checklistItems]="items()"
                              (toggle)="checklistItemService.toggle$.next($event)"
-                             (remove)="checklistItemService.remove$.next($event)" />
+                             (remove)="checklistItemService.remove$.next($event)"
+                             (edit)="checklistItemBeingEdited.set($event)"/>
     <app-modal [isOpen]="!!checklistItemBeingEdited()">
       <ng-template>
         <app-form-modal
-          title="Créer un ToDo"
+          title="{{ checklistItemBeingEdited()?.id ? 'Modifier un ToDo' : 'Créer un ToDo' }}"
           [formGroup]="checklistItemForm"
-          (save)="checklistItemService.add$.next({
-            item: checklistItemForm.getRawValue(),
-            checklistId: checklist()?.id!,
-          })"
-          (close)="checklistItemBeingEdited.set(null)"
+          (save)="checklistItemBeingEdited()?.id
+          ? checklistItemService.edit$.next({
+              id: checklist()?.id!,
+              data: checklistItemForm.getRawValue(),
+          })
+          : checklistItemService.add$.next({
+              item: checklistItemForm.getRawValue(),
+              checklistId: checklist()?.id!,
+            })"
+            (close)="checklistItemBeingEdited.set(null)
+          "
         ></app-form-modal>
       </ng-template>
     </app-modal>
@@ -76,9 +83,10 @@ export default class ChecklistComponent {
     this.checklistItemService.loadChecklistItemsFromStorage(this.params()?.get('id'));
     effect(() => {
       const checklistItem = this.checklistItemBeingEdited();
-      console.log(checklistItem);
       if (!checklistItem) {
         this.checklistItemForm.reset();
+      } else {
+        this.checklistItemForm.patchValue(checklistItem);
       }
     });
   }

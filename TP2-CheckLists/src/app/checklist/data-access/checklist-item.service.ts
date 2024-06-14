@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import {
   AddChecklistItem,
-  ChecklistItem,
+  ChecklistItem, EditChecklistItem,
 } from '../../shared/interfaces/checklist-item';
 import {Checklist} from "../../shared/interfaces/checklist";
 import {StorageService} from "../../shared/data-access/storage.service";
@@ -34,6 +34,7 @@ export class ChecklistItemService {
   add$ = new Subject<AddChecklistItem>();
   reset$ = new Subject<Checklist>();
   toggle$ = new Subject<CheckListItem>();
+  edit$ = new Subject<EditChecklistItem>();
   remove$ = new Subject<CheckListItem>();
 
   constructor() {
@@ -52,6 +53,19 @@ export class ChecklistItemService {
         ],
       }));
     });
+
+    // TODO : Voir pourquoi l'édition ne fonctionne pas
+    this.edit$.pipe(takeUntilDestroyed())
+      .subscribe((update) => {
+        this.state.update((state) => ({
+          ...state,
+          checklistItems: state.checklistItems.map((item) =>
+            item.id === update.id ? {...item, title: update.data.title} : item
+          ),
+        }));
+        console.log(update);
+      }
+    );
 
     this.remove$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) => {
       this.state.update((state) => ({
